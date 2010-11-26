@@ -1,0 +1,216 @@
+<!doctype html>  
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>dji18njs Sample Page</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="test.css" type="text/css" media="screen" />
+    <style type="text/css" media="screen">
+        body {
+            margin: 20px;
+        }
+        
+        h1 {
+            font-size: 200%;
+            color: #000;
+            margin: 20px 0 0 0;
+        }
+        
+        h2 {
+            font-size: 150%;
+            font-weight: normal;
+            margin: 0 0 15px 0;
+            color: #555;
+        }
+        
+        h3 {
+            margin: 15px 0 0 0;
+        }
+        
+        pre {
+            background: #eee;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+        }
+        
+        code {
+            font-family: Monaco, 'Courier New', Arial, Sans-Serif;
+            color: #555;
+            line-height: 1.5em;
+        }
+        
+        ul {
+            list-style: square;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            line-height: 1.5em;
+        }
+        
+        .result {
+            background: #efe;
+            padding: 10px;
+            border: 3px solid #cdc;
+        }
+    </style>
+    <script src="dji18njs-1.1.js"></script>
+    <script src="locale-tr.js"></script>
+    <script src="locale-de.js"></script>
+</head>
+<body>
+    <div id="container">
+        <header></header>
+        <div id="main">
+            <h1>List of Properties</h1>
+            <ul>
+                <li>dji18njs.<strong>version</strong></li>
+            </ul>
+            
+            <h1>List of Methods</h1>
+            <ul>
+                <li>dji18njs.<strong>gettext</strong>(<em>string</em>);</li>
+                <li>dji18njs.<strong>ngettext</strong>(<em>string:Singular</em>, <em>string:Plural</em>, <em>integer:Amount</em>);</li>
+                <li>dji18njs.<strong>interpolate</strong>(<em>string:Template/Place holder</em>, <em>array:Values</em>);</li>
+                <li>dji18njs.<strong>interpolate</strong>(<em>string:Template/Place holder</em>, <em>object:Values</em>, <strong>Boolean:true</strong>);</li>
+            </ul>
+            
+            <h1>Quick Example</h1>
+            <h2>Locale: locale-tr.js</h2>
+            <h3>File:</h3>
+            <pre><code>// Define catalog object
+            // ----------------------------------------------------------------
+            // Türkçe
+            dji18njs.catalog.tr = {
+                &quot;key&quot;: &#x27;anahtar&#x27;,
+                &quot;keys&quot;: &#x27;anahtarlar&#x27;,
+                &quot;email&quot;: &#x27;eposta&#x27;,
+                &quot;emails&quot;: &#x27;epostalar&#x27;,
+                &quot;Hello world in Turkish&quot;: &#x27;T&uuml;rk&ccedil;e Merhaba d&uuml;nya&#x27;,
+                &quot;Hello %s in Turkish&quot;: &#x27;T&uuml;rk&ccedil;e Merhaba %s&#x27;,
+                &quot;Hello %(user)s in Turkish&quot;: &#x27;T&uuml;rk&ccedil;e Merhaba %(user)s&#x27;,
+                &quot;There %(is)s %(amount)s new %(email)s for you.&quot;: &#x27;Sizin i&ccedil;in %(amount)s tane yeni eposta var.&#x27;,
+            };
+            </code></pre>
+
+            <h2>Locale: locale-de.js</h2>
+            <h3>File:</h3>
+            <pre><code>// Define catalog object
+            // ----------------------------------------------------------------
+            // Deutsch
+            dji18njs.catalog.de = {
+                &quot;key&quot;: &#x27;schl&uuml;ssel&#x27;,
+                &quot;keys&quot;: &#x27;schl&uuml;ssel&#x27;,
+                &quot;Hello world in Turkish&quot;: &#x27;Hallo die Weld&#x27;,
+                &quot;Hello %s in Turkish&quot;: &#x27;Deutsch Hallo %s&#x27;,
+                &quot;Hello %(user)s in Turkish&quot;: &#x27;Deutsch Hallo %(user)s&#x27;,
+                &quot;There %(is)s %(amount)s new %(email)s for you.&quot;: &#x27;Sie haben %(amount)s email.&#x27;,
+            };</code></pre>
+            
+            <h3>Code:</h3>
+            <pre><code>var strFormat = &quot;There %(is)s %(amount)s new %(email)s for you.&quot;;
+            var intAmount = 2;
+            var objWords = {
+                amount: intAmount,
+                is: dji18njs.ngettext(&quot;is&quot;, &quot;are&quot;, intAmount),
+                email: dji18njs.ngettext(&quot;email&quot;, &quot;emails&quot;, intAmount),
+            };
+
+            document.write(&quot;&lt;strong&gt;&quot;, dji18njs.lang_id, &quot;&lt;/strong&gt;:&quot;, &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.gettext(&quot;Hello world&quot;), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.ngettext(&quot;key&quot;, &quot;keys&quot;, 5), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(&quot;Hello %s&quot;, [&quot;vigo&quot;]), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(&quot;Hello %(user)s&quot;, { user: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(strFormat, objWords, true), &quot;&lt;br/&gt;&quot;);
+            document.write(&quot;&lt;hr/&gt;&quot;);
+
+            dji18njs.lang_id = &quot;tr&quot;;
+            document.write(&quot;&lt;strong&gt;&quot;, dji18njs.lang_id, &quot;&lt;/strong&gt;:&quot;, &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.gettext(&quot;Hello world in Turkish&quot;), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.ngettext(&quot;key&quot;, &quot;keys&quot;, 5), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(&quot;Hello %s in Turkish&quot;, [&quot;vigo&quot;]), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(&quot;Hello %(user)s in Turkish&quot;, { user: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(strFormat, objWords, true), &quot;&lt;br/&gt;&quot;);
+            document.write(&quot;&lt;hr/&gt;&quot;);
+
+            dji18njs.lang_id = &quot;de&quot;;
+            document.write(&quot;&lt;strong&gt;&quot;, dji18njs.lang_id, &quot;&lt;/strong&gt;:&quot;, &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.gettext(&quot;Hello world in Turkish&quot;), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.ngettext(&quot;key&quot;, &quot;keys&quot;, 5), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(&quot;Hello %s in Turkish&quot;, [&quot;vigo&quot;]), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(&quot;Hello %(user)s in Turkish&quot;, { user: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(strFormat, objWords, true), &quot;&lt;br/&gt;&quot;);
+            </code></pre>
+            
+            <h1>Result:</h1>
+            <div class="result">
+            <script>
+                var strFormat = "There %(is)s %(amount)s new %(email)s for you.";
+                var intAmount = 2;
+                var objWords = {
+                    amount: intAmount,
+                    is: dji18njs.ngettext("is", "are", intAmount),
+                    email: dji18njs.ngettext("email", "emails", intAmount),
+                };
+
+                document.write("<strong>", dji18njs.lang_id, "</strong>:", "<br/>");
+                document.write(dji18njs.gettext("Hello world"), "<br/>");
+                document.write(dji18njs.ngettext("key", "keys", 5), "<br/>");
+                document.write(dji18njs.interpolate("Hello %s", ["vigo"]), "<br/>");
+                document.write(dji18njs.interpolate("Hello %(user)s", { user: "lego" }, true), "<br/>");
+                document.write(dji18njs.interpolate(strFormat, objWords, true), "<br/>");
+                document.write("<hr/>");
+                
+                dji18njs.lang_id = "tr";
+                document.write("<strong>", dji18njs.lang_id, "</strong>:", "<br/>");
+                document.write(dji18njs.gettext("Hello world in Turkish"), "<br/>");
+                document.write(dji18njs.ngettext("key", "keys", 5), "<br/>");
+                document.write(dji18njs.interpolate("Hello %s in Turkish", ["vigo"]), "<br/>");
+                document.write(dji18njs.interpolate("Hello %(user)s in Turkish", { user: "lego" }, true), "<br/>");
+                document.write(dji18njs.interpolate(strFormat, objWords, true), "<br/>");
+                document.write("<hr/>");
+
+                dji18njs.lang_id = "de";
+                document.write("<strong>", dji18njs.lang_id, "</strong>:", "<br/>");
+                document.write(dji18njs.gettext("Hello world in Turkish"), "<br/>");
+                document.write(dji18njs.ngettext("key", "keys", 5), "<br/>");
+                document.write(dji18njs.interpolate("Hello %s in Turkish", ["vigo"]), "<br/>");
+                document.write(dji18njs.interpolate("Hello %(user)s in Turkish", { user: "lego" }, true), "<br/>");
+                document.write(dji18njs.interpolate(strFormat, objWords, true), "<br/>");
+            </script>
+            </div>
+            
+            <h1>gettext</h1>
+            <h2>dji18njs.<strong>gettext</strong>(<em>string</em>);</h2>
+            <p>Description</p>
+            <h3>Code:</h3>
+            <pre><code>code...</code></pre>
+            <hr/>
+            
+            <h1>ngettext</h1>
+            <h2>dji18njs.<strong>ngettext</strong>(<em>string:Singular</em>, <em>string:Plural</em>, <em>integer:Amount</em>);</h2>
+            <p>Description</p>
+            <h3>Code:</h3>
+            <pre><code>code...</code></pre>
+            <hr/>
+            
+            <h1>interpolate.1</h1>
+            <h2>dji18njs.<strong>interpolate</strong>(<em>string:Template/Place holder</em>, <em>array:Values</em>);</h2>
+            <p>Description</p>
+            <h3>Code:</h3>
+            <pre><code>code...</code></pre>
+            <hr/>
+            
+            <h1>interpolate.2</h1>
+            <h2>dji18njs.<strong>interpolate</strong>(<em>string:Template/Place holder</em>, <em>object:Values</em>, <strong>Boolean:true</strong>);</h2>
+            <p>Description</p>
+            <h3>Code:</h3>
+            <pre><code>code...</code></pre>
+            <hr/>
+            
+        </div>
+        <footer></footer>
+    </div>
+</body>
+</html>
