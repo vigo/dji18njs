@@ -123,6 +123,8 @@
             document.write(dji18njs.interpolate(&quot;Hello %s&quot;, [&quot;vigo&quot;]), &quot;&lt;br/&gt;&quot;);
             document.write(dji18njs.interpolate(&quot;Hello %(user)s&quot;, { user: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
             document.write(dji18njs.interpolate(strFormat, objWords, true), &quot;&lt;br/&gt;&quot;);
+            document.write(&quot;&lt;br/&gt;&quot;, dji18njs.interpolate(&quot;Hello %(user)s in Turkish&quot;, { userx: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(&quot;Hello %(userx)s in Turkish&quot;, { user: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
             document.write(&quot;&lt;hr/&gt;&quot;);
 
             dji18njs.lang_id = &quot;tr&quot;;
@@ -132,6 +134,8 @@
             document.write(dji18njs.interpolate(&quot;Hello %s in Turkish&quot;, [&quot;vigo&quot;]), &quot;&lt;br/&gt;&quot;);
             document.write(dji18njs.interpolate(&quot;Hello %(user)s in Turkish&quot;, { user: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
             document.write(dji18njs.interpolate(strFormat, objWords, true), &quot;&lt;br/&gt;&quot;);
+            document.write(&quot;&lt;br/&gt;&quot;, dji18njs.interpolate(&quot;Hello %(user)s in Turkish&quot;, { userx: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(&quot;Hello %(userx)s in Turkish&quot;, { user: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
             document.write(&quot;&lt;hr/&gt;&quot;);
 
             dji18njs.lang_id = &quot;de&quot;;
@@ -141,6 +145,8 @@
             document.write(dji18njs.interpolate(&quot;Hello %s in Turkish&quot;, [&quot;vigo&quot;]), &quot;&lt;br/&gt;&quot;);
             document.write(dji18njs.interpolate(&quot;Hello %(user)s in Turkish&quot;, { user: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
             document.write(dji18njs.interpolate(strFormat, objWords, true), &quot;&lt;br/&gt;&quot;);
+            document.write(&quot;&lt;br/&gt;&quot;, dji18njs.interpolate(&quot;Hello %(user)s in Turkish&quot;, { userx: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
+            document.write(dji18njs.interpolate(&quot;Hello %(userx)s in Turkish&quot;, { user: &quot;lego&quot; }, true), &quot;&lt;br/&gt;&quot;);
             </code></pre>
             
             <h1>Result:</h1>
@@ -160,6 +166,9 @@
                 document.write(dji18njs.interpolate("Hello %s", ["vigo"]), "<br/>");
                 document.write(dji18njs.interpolate("Hello %(user)s", { user: "lego" }, true), "<br/>");
                 document.write(dji18njs.interpolate(strFormat, objWords, true), "<br/>");
+
+                document.write("<br/>", dji18njs.interpolate("Hello %(user)s in Turkish", { userx: "lego" }, true), "<br/>");
+                document.write(dji18njs.interpolate("Hello %(userx)s in Turkish", { user: "lego" }, true), "<br/>");
                 document.write("<hr/>");
                 
                 dji18njs.lang_id = "tr";
@@ -169,6 +178,9 @@
                 document.write(dji18njs.interpolate("Hello %s in Turkish", ["vigo"]), "<br/>");
                 document.write(dji18njs.interpolate("Hello %(user)s in Turkish", { user: "lego" }, true), "<br/>");
                 document.write(dji18njs.interpolate(strFormat, objWords, true), "<br/>");
+
+                document.write("<br/>", dji18njs.interpolate("Hello %(user)s in Turkish", { userx: "lego" }, true), "<br/>");
+                document.write(dji18njs.interpolate("Hello %(userx)s in Turkish", { user: "lego" }, true), "<br/>");
                 document.write("<hr/>");
 
                 dji18njs.lang_id = "de";
@@ -178,35 +190,49 @@
                 document.write(dji18njs.interpolate("Hello %s in Turkish", ["vigo"]), "<br/>");
                 document.write(dji18njs.interpolate("Hello %(user)s in Turkish", { user: "lego" }, true), "<br/>");
                 document.write(dji18njs.interpolate(strFormat, objWords, true), "<br/>");
+                
+                document.write("<br/>", dji18njs.interpolate("Hello %(user)s in Turkish", { userx: "lego" }, true), "<br/>");
+                document.write(dji18njs.interpolate("Hello %(userx)s in Turkish", { user: "lego" }, true), "<br/>");
             </script>
             </div>
             
+            <h1>catalog</h1>
+            <h2>dji18njs.catalog: <em>object</em></h2>
+            <p>Default: <strong>dji18njs.catalog.en</strong></p>
+            <h3>Code:</h3>
+            <pre><code>dji18njs.catalog.tr {
+                &quot;Hello world&quot;: &#x27;Merhaba D&uuml;nya&#x27;;
+            }</code></pre>
+            
             <h1>gettext</h1>
             <h2>dji18njs.<strong>gettext</strong>(<em>string</em>);</h2>
-            <p>Description</p>
+            <p>Checks the catalog, returns the value if key exists. If not, returns passed value</p>
             <h3>Code:</h3>
-            <pre><code>code...</code></pre>
+            <pre><code>dji18njs.gettext(&quot;Hello world&quot;);
+            // returns catalog value if &quot;Hello world&quot; exists in the catalog
+            // if not, returns &quot;Hello world&quot;</code></pre>
             <hr/>
             
             <h1>ngettext</h1>
             <h2>dji18njs.<strong>ngettext</strong>(<em>string:Singular</em>, <em>string:Plural</em>, <em>integer:Amount</em>);</h2>
-            <p>Description</p>
+            <p>Singular / Plural solution</p>
             <h3>Code:</h3>
-            <pre><code>code...</code></pre>
+            <pre><code>dji18njs.ngettext(&quot;key&quot;, &quot;keys&quot;, 5);
+                // returns &quot;keys&quot;</code></pre>
             <hr/>
             
             <h1>interpolate.1</h1>
             <h2>dji18njs.<strong>interpolate</strong>(<em>string:Template/Place holder</em>, <em>array:Values</em>);</h2>
-            <p>Description</p>
+            <p>%s is a placeholder for incoming arguments. Arguments are an Array.</p>
             <h3>Code:</h3>
-            <pre><code>code...</code></pre>
+            <pre><code>dji18njs.interpolate(&quot;Hello %s in Turkish, your email is %s&quot;, [&quot;vigo&quot;, &quot;vigo@abc.net&quot;]);</code></pre>
             <hr/>
             
             <h1>interpolate.2</h1>
             <h2>dji18njs.<strong>interpolate</strong>(<em>string:Template/Place holder</em>, <em>object:Values</em>, <strong>Boolean:true</strong>);</h2>
-            <p>Description</p>
+            <p>Python style text formatting. Arguments are a dictionary object.</p>
             <h3>Code:</h3>
-            <pre><code>code...</code></pre>
+            <pre><code>dji18njs.interpolate(&quot;Hello %(user)s in Turkish&quot;, { user: &quot;lego&quot; }, true);</code></pre>
             <hr/>
             
         </div>
