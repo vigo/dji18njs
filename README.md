@@ -3,7 +3,7 @@ dji18njs
 
 English
 -------
-**dji18njs** is a small internationalization and localization script. Original script can be found at : [here][django]
+**dji18njs** is a small internationalization and localization script. Original script can be found at: [here][django]
 
 I tweaked and changed a lot. i hope you all like it! i've added some sample locale files and a test.html.
 
@@ -65,7 +65,7 @@ If the catalog exists:
     // the function above
     // returns 'Selam vigo, cebinde 1 tane jeton var'
 
-Here comes my favourite. You can use **dji18njs** as a templating helper.
+Here comes my favorite. You can use **dji18njs** as a templating helper:
 
     var strFormat = "Hello %(username)s, your password is: %(password)s";
     var dicWords = {
@@ -85,7 +85,7 @@ Here is an errorious "named interpolate" example:
     
     // returns 'Hello ?%(user)s? in Turkish'
 
-For more details examples, please check: **test.html** file
+For more details examples, please check: `test.html` file
 
 Türkçe
 ------
