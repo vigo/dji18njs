@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Dji18njs : Modified and hardcore changed version of Django's i18n-javascript function. Can be usable as JavasScript Template engine. If you familiar with python's &quot;format text&quot; you will love this!" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Dji18njs</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/vigo/dji18njs">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Dji18njs</h1>
+          <h2 id="project_tagline">Modified and hardcore changed version of Django's i18n-javascript function. Can be usable as JavasScript Template engine. If you familiar with python's &quot;format text&quot; you will love this!</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/vigo/dji18njs/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/vigo/dji18njs/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1> dji18njs</h1>
+
+<p><strong>dji18njs</strong> is a small internationalization and localization script. Original script can be found at: <a href="http://code.djangoproject.com/browser/django/trunk/django/views/i18n.py" title="Django i18n">here</a>. I tweaked and changed a lot. I hope you all like it! I've added some sample locale files and a <code>test.html</code>. Here is the list of my tweaks:</p>
+
+<ul>
+<li>Bind to <code>window.dji18njs</code>, dji18njs namespace </li>
+<li>You can set language by <code>dji18njs.lang_id</code>
+</li>
+<li>
+<strong>dji18njs.ngettext</strong> re-written from scratch and changed</li>
+<li>
+<strong>dji18njs.interpolate</strong> has changed and added "erroious notification"</li>
+<li>Version property</li>
+</ul><h2>Usage</h2>
+
+<p>Include the script as usual place, then add the locale file (or files). Default language is always <strong>English</strong> (en)</p>
+
+<pre><code>&lt;script src="dji18njs-1.1.js"&gt;&lt;/script&gt;
+&lt;script src="locale-tr.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Catalog file looks like this:</p>
+
+<pre><code>dji18njs.catalog.tr = {
+// english =&gt; turkish
+    key: value,
+    "Hello world": 'Merhaba dünya',
+}
+</code></pre>
+
+<p>You can call it:</p>
+
+<pre><code>dji18njs.gettext("Hello world"); // returns 'Merhaba dünya'
+</code></pre>
+
+<h3>Singular, plural</h3>
+
+<pre><code>django.ngettext("ball", "balls", 5); // returns 'balls'
+django.ngettext("ball", "balls", 0); // returns 'ball'
+django.ngettext("ball", "balls", 1); // returns 'ball'
+</code></pre>
+
+<h3>Interpolation</h3>
+
+<pre><code>var strFormat = "Hello %s, you have %s %s in your pocket";
+dji18njs.interpolate(strFormat, ["vigo", 5, 'coins']);
+// returns 'Hello vigo, you have 5 coins in your pocket'
+</code></pre>
+
+<h3>More complex!</h3>
+
+<pre><code>dji18njs.catalog.tr = {
+    "coin": 'jeton',
+    "coins": 'jeton',
+    "Hello %s, you have %s %s in your pocket": 'Selam %s, cebinde %s tane %s var'
+};
+// the function above
+// returns 'Selam vigo, cebinde 1 tane jeton var'
+</code></pre>
+
+<p>Here comes my favorite. You can use <strong>dji18njs</strong> as a templating helper:</p>
+
+<pre><code>var strFormat = "Hello %(username)s, your password is: %(password)s";
+var dicWords = {
+    "username": 'vigo',
+    "password": '1!2!3!'
+};
+dji18njs.interpolate(strFormat, dicWords, true);
+// you must pass true as 3rd argument to execute named object!
+// returns 'Hello vigo, your password is: 1!2!3!'
+</code></pre>
+
+<h3>Errorious "named interpolate"</h3>
+
+<pre><code>// string has %(user)s but there is no "user" in the object. it is "userx".
+// they don't match
+
+dji18njs.interpolate("Hello %(user)s in Turkish", { userx: "lego" }, true);
+// returns 'Hello ?%(user)s? in Turkish'
+</code></pre>
+
+<p>For more details examples, please check: <code>test.html</code> file.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Dji18njs maintained by <a href="https://github.com/vigo">vigo</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
